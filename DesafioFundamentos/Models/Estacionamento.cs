@@ -12,20 +12,31 @@ namespace DesafioFundamentos.Models
             this.precoPorHora = precoPorHora;
         }
 
+        /// <summary>
+        /// Método de adicionar o veículo ao controle de estacionamento
+        /// </summary>
         public void AdicionarVeiculo()
         {
             // TODO: Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "veiculos"
-            // *IMPLEMENTE AQUI*
-            Console.WriteLine("Digite a placa do veículo para estacionar:");
-        }
+            // *IMPLEMENTADO*
 
+            Console.WriteLine("Digite a placa do veículo para estacionar:");
+            //Placa digitada pelo usuário
+            string placa = Console.ReadLine().ToString();
+            //inclusão
+            veiculos.Add(placa);
+        }
+        
+        /// <summary>
+        /// Método para verificar se o veículo está no estacionamento e refazer o cálculo de seu tempo estacionado, posteriormente removendo-o do estacionamento
+        /// </summary>
         public void RemoverVeiculo()
         {
             Console.WriteLine("Digite a placa do veículo para remover:");
 
             // Pedir para o usuário digitar a placa e armazenar na variável placa
-            // *IMPLEMENTE AQUI*
-            string placa = "";
+            // *IMPLEMENTADO*
+            string placa = Console.ReadLine().ToString();
 
             // Verifica se o veículo existe
             if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
@@ -34,12 +45,15 @@ namespace DesafioFundamentos.Models
 
                 // TODO: Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
                 // TODO: Realizar o seguinte cálculo: "precoInicial + precoPorHora * horas" para a variável valorTotal                
-                // *IMPLEMENTE AQUI*
+                // *IMPLEMENTADO*
                 int horas = 0;
-                decimal valorTotal = 0; 
+                decimal valorTotal = 0;
+                horas = Convert.ToInt16(Console.ReadLine());
+                valorTotal = Math.Round(precoInicial + (precoPorHora * horas), 2);
 
                 // TODO: Remover a placa digitada da lista de veículos
-                // *IMPLEMENTE AQUI*
+                // *IMPLEMENTADO*
+                veiculos.Remove(placa);
 
                 Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
             }
@@ -49,6 +63,9 @@ namespace DesafioFundamentos.Models
             }
         }
 
+        /// <summary>
+        /// Método para listar os veículos estacionados
+        /// </summary>
         public void ListarVeiculos()
         {
             // Verifica se há veículos no estacionamento
@@ -56,7 +73,12 @@ namespace DesafioFundamentos.Models
             {
                 Console.WriteLine("Os veículos estacionados são:");
                 // TODO: Realizar um laço de repetição, exibindo os veículos estacionados
-                // *IMPLEMENTE AQUI*
+                // *IMPLEMENTADO*
+                //laço para percorrer os veículos estacionados
+                foreach (string veiculo in veiculos)
+                {
+                    Console.WriteLine($"Placa {veiculo}");
+                }
             }
             else
             {
